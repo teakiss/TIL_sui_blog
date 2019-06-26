@@ -1,0 +1,535 @@
+수희 프리코스 복습일지 190625~
+—————————
+
+<변수>
+
+변수 선언방법
+var a= 10;
+var 변수이름 = 값;
+값 없이 변수 선언
+var x; 
+이때 x = undefined
+
+var a = 10; 
+a = 5;
+ 또는
+var a = 10;
+var b = a; //b = 10;
+
+var a= 10;
+var b = a;
+a = 20; // a = 20, b = 10;
+
+var a = [1,2,3];
+var b = a;
+a[0] = 0;  // b = [0,2,3] 왜냐면 a,b가 완전히 같은 메모리를 참조하고 있기 때문
+
+*변수의 사용 범위 => scope라고 함니다
+모든 함수는 선언동시에 자신만의 scope를 가짐 => local scope
+문서 전체에서 사용할수 있는 scope => Global Scope
+
+var greeting = ‘Hello’;
+function greetingSomeone(){
+  var firstName = ‘Josh’;
+  return greeting + ‘ ‘ + firstName;
+}
+
+greetSomeone(); // Hello Josh
+FirstName; // reference error
+
+—
+var greeting = ‘Hello’;
+function greetingSomeone(){
+  var firstName = ‘Josh’;
+  greeting = ‘Bonjour’;
+  return greeting + ‘ ‘ + firstName;
+}
+
+greetingSomeone(); // ‘Bonjour Josh’;
+firstName; // Reference error;
+greeting; // ‘Bongjour’;  *** greeting은 globalScope에서 선언되었으므로 local Scope에도 접근이 가능합니다!!!
+
+————————————————
+<타입>
+1. Number, String
+2. 타입 체크
+
+Number, String, Boolean, Array 등
+
+타입을 늘 점검하세요
+변수에 값을 넣었을때 내가 예상했던 타입을 보장하기 어려우면 미리 타입체크를 하자 
+
+typeof 사용하자
+
+typeof pi; //‘number’
+
+엄격한 타입체크 형식 쓰자요 ===
+
+null & undefined
+: null = 값이 없음 , 
+undefined = 변수선언하고 아무것도 대입하지 않으면 undefined
+둘다 falsy
+
+undefined는 그 자체로 하나의 타입이다
+
+—————————————
+<조건>Conditional
+1 .필요이유
+2. boolean
+3. Comparison Operation
+4. Logical Operation
+5. Conditional Statements
+ 
+**switch
+————————
+<반복문>iteration
+
+var result = 0;	  //result는 0이다
+for(var i = 1; i <= 100; i = i+1){
+  result = result + j;
+}
+
+result; //5050
+i; // 101 왜냐면 i 는 언제나 for loop 내부의 코드가 실행된 이후에 실행되기 때문입니다.
+
+while>
+
+var result = 0;
+var i = 1;
+while ( i <= 100 ){
+  result += i;
+  i += 1;
+}
+
+———
+<function>
+var 함수이름 = function( 매개변수들 ){
+  // 실행 될 코드
+}; // 함수 표현식
+
+function 함수이름 ( 매개변수들 ){
+  // 실행 될 코드
+}; // 함수 선언식
+
+*매개변수 parameter 함수내부에서 사용할 변수 
+
+var timeToGoHome = function ( speed, distance ) {
+  return distance / speed;
+};
+
+timeToGoHome(10,50); // 이것이 호출이다 invoking
+
+
+————————
+<Array & Object>
+array.shift(); // 첫번째 값 제거
+array.unshift(); // 맨 앞에 값을 추가한다.
+
+—————————
+————————
+Coding Style Guide
+
+코드를 읽기 좋게 작성하는 것은 매 중요한 일이다
+
+코드 가독성>
+목적을 뚜렷하고 자명하게 할것, 구조가 일관되고 예측가능할것
+
+*Indentation - 들여쓰기
+:두칸 들여쓰기
+
+=====================================
+190626 wed
+
+1. learnco.codestates.com  복습
+2. programmers Algorithm
+======================================
+*짧게쓰기
+
+*제1원칙 : 자명한 코드를 쓰는것
+자명한 코드란, 코멘트나 힌트 없이, 다른 누구에게 설명을 부탁하지 않아도, 작성된 코드의 과정과 결과가 이해하기 쉬운코드
+
+*되도록 부정을 사용하지 마세여(명확성이 떨어질수 있어여)
+
+*Boolean 결과값을 바로 return 하세여
+//Verbose:(말이 많은)
+if ( charSet.size < text.length ) {
+  return false;
+}
+return true;
+ 
+//Concise:(간결한)
+return charSet.size > text.length;
+
+*줄바꿈 최소한으로 사용해여. 줄바꿈을 덜 할수록 한 화면에서 더많은 코드를 볼수있어여
+
+———————————
+<string methods>
+* str[index] //read-only
+* + 연산자 쓸수있다 // toString = str1.concat(str2, str3...) 의 형태도있음
+* length PROPERTY
+* str.indexOf(searchValue) // 처음으로 일치하는 index, 찬는게없으면 -1
+ // lastIndexOf // 문자열의 뒤에서부터 찾음
+* str.includes(searchValue) //Explorer에서 작동안해
+* str.split(seperator) // 분리된 문자열이 포함된 배열 return 
+* str.substring(start, end) // return: 시작과 끝 index사이의 문자열
+* str.slice(start, end) 
+* str.toLowerCase() /  str.toUpperCase() // return: 대소문자로 변환된 문자열
+
+* 모든 string methods는 immutable // 원본이 변하지 않는다
+* array methods는 immutable / mutable 을 잘 기억해야한다
+
+*str.trim() // 앞뒤 공백 없애줌
+ * 정규표현식에 대하여 
+https://ko.wikipedia.org/wiki/%EC%A0%95%EA%B7%9C_%ED%91%9C%ED%98%84%EC%8B%9D
+
+<Number / Math Methods>
+* Number.isInteger(value) // boolean
+* parseInt(value) / parseFloat(value)
+* num.toFixed([digits]) // arguments: 소수점 뒤에 나타낼 자리수(optional), return: 문자열, 반올림
+* Math.min(arr) / Math.max(arr)
+* Math.floor(x) / Math.round(x)  //내림, 올름
+* Math.random() // 0,1사이의 난수
+* abs
+* sqrt / pow
+* Math.random() 을 이용해, 특정 범위의 랜덤한 수 리턴하기 
+// min, max 포함
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+* Math.random()을 이용해, 일정한 길이의 임의의 글자 리턴하기
+//아래코드
+function getGUID() {
+  var text = '';
+  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  
+  for(var i=0; i < 5; i++ ) {
+    text += possible.charAt(Math.random() * possible.length);
+  }
+  return text
+}
+* str.charAt(index) // 문자열에서 특정 인덱스에 위치하는 단일문자 리턴
+
+<Array Methods>
+
+* arr.forEacj(callback) *immutable* // elements길이만큼 반복하는 함수 
+function printArray(currentElement, index, array) {
+  console.log(index + ‘: ‘ + currentElement);
+}
+
+[‘hello’, 3, 5].forEach(printArray);
+//0: ‘hello’
+//1: 3
+//2: 5
+
+* arr.map(callback) *immutable* // arr.forEach와 다른점은 실행된 값을 담은 새 배열을 return
+-callback내에 return 이 필요해
+-기존 배열과 동일한 길이, 형태가 다른 새로운 배열이 나옴
+
+——————————
+<Algorithm>
+============
+
+* pseudocode 와 구현하기
+//텍스트를 입력으로 받는다
+////foo라는 단어를 찾는다
+//////끝까지 일치하는지 확인해본 후, 
+//////foo라는 글자의index가 -1이 아니면 단어를 찾은것이다.
+////while index를 발견하면
+//////index를 이용해 foo바로 앞까지의 텍스트를 얻어내고
+//////foo대신 새로운 단어를 넣는다
+//////foo이후의 텍스트를 넣는다
+////end while
+//바뀐내용을 리턴한다
+
+function replaceFoo(text) {
+  while( text.indexOf('foo') !== -1) {
+    var index = text.indexOf('foo');
+    
+    //index를 이용해 foo바로 앞까지의 텍스트를 얻어내고
+    var beforeText = text.slice(0, index);
+    //foo대신 새로운 단어를 넣는다
+    var replaceText = 'BAR';
+    //foo이후의 텍스트를 넣는다
+    var afterText = text.slice(index + 3); //foo는 세글자이므로 3을 더함
+    
+    text = beforeText + replaceText + afterText;
+  }
+  return text;
+}
+
+* function을 통해 기능을 분리해서 코딩할 수 있게
+* logic을 생각하여 도식화 한 후 코드로 옮길 수 있게
+* algorithm구현에 필요한 JavaScript 문법을 능숙하게 사용할 수 있게 공부하자!
+
+
+———————————————————
+<Tools(git, CLI)>
+=============
+
+CLI (Commend Line Interface) 
+버전관리 시스템 : 대표 git
+
+* git의 기본 개념 
+-local/remote repository
+-fork, clone, commit, pull, push
+* git명령어와 git repository의 현재 상태 및 변경사항들을 확인할 수 있다. 
+-status, diff, log
+* pull request를 이용한 오픈소스 프로젝트 참여방식
+* git의 효과적인 사용
+-reset, checkout
+-branch
+* 기본적인 unix/linux 명령어를 사용할 수 있다
+-ls, cd, mkdir, rm, pwd, sudo, chown
+* unix/linux 명령어를 사용할 때 등장하는 키워드에 대해 이해할 수 있다.
+-현재 디렉토리, 홈 디렉토리, 루트 디렉토리
+* unix/kinux 파일/디렉토리 소유권에 대해 이해 할 수 있다.
+
+<CLI>
+-빈파일 생성: touch [file_name]
+-디렉토리 생성: mkdir [dir_name]
+-텍스트 형태의 파일 확인: cat [file_name]
+-파일 및 디렉토리 옮기기: mv [file_or_dir] [target_dir]
+-파일 및 디렉토리 이름바꾸기: mv [file_or_fir] [ new_name]
+-복사: cp [file] [target_dir] / cp -r [folder]
+-파일 삭제: rm [file_name] //정말 삭제할 것인지 확인하지 않으며 한번 삭제된 파일은 휴지통에 들어기자 않는다!
+-폴터 삭제: rm -r [dirname]
+
+-관리자 권한으로 실행: sudo
+-explorer . : 현재 폴더를 windows파일 관리자에서 보기
+-open . : 현재 폴더를 macOS Finder에서 보기
+-code . : 현재 폴더를 VS Code에디터로 열기
+
+<Git의 이해>
+the revision cycle
+————
+-코드를 작성하기 전에 terminal에서 git status 로 시작상태를 확인하세요.
+-master branch 에 작업을 하세요.(branch를 나눠서 기능을 개발하는 경우가 아니라면 일단 모든 작업 내용은 master branch 에 기록하세요.)
+—가능한 작은 코드의 변화들을 기록하세요. 5~10줄의 변화, 10~20분, 최대 15줄 등의 일정한 변화의 기준을 정합니다.
+-git status 로 어떤 파일들이 변경되었는지 확인하세요.
+-git diff 로 지금까지 변경한 코드 부분들을 리뷰하고 확인하세요.
+-git add 로 커밋을 원하는 파일을 추가하세요 
+— 명령어: git add <file name>
+-git status 로 추가된 파일이 추가하려 했던 파일이 맞는지 확인하세요.
+-git commit 으로 커밋 히스토리에 변경된 내용을 커밋하세요.
+—commit 할 때, 이 코드들이 어떤 부분을 개선했는지에 대해 설명하는 commit message를 작성하세요.
+—e.g. : git commit -m “pre-32 홍수희 koans complete”
+-git status 로 커밋이 기대한 것 처럼 잘 되었는지 확인하세요.
+—————
+제출
+———-
+과제를 git add 했고 git commit -m “memo”까지 commit을 마쳤다면, 여기서 자신이 한 테스트 과제를 origin에 push하세요.
+—명령어: git push <repo> <branch>
+—e.g.: git push origin master
+-GirHub에 들어가서 본인이 push한 repository에 업데이트된 내역을 확인합니다.
+마지막으로 과제완료시, GitHub에서 New Pull Request 또는 Pull Request 를 날립니다.
+
+—————————
+<TDD (Test-Driven Development)>
+==============
+
+
+——————————
+<Scope & Closure>
+================
+Scope 가 lexical 하다. : scope가 선언되었다  
+———————
+Rule 2. block level vs. function level>
+-JavaScript는 기본적으로 function level의 scope규칙을 따른다
+
+Rule 3. 전역변수와 window객체
+-함수 외부에서 선언 = 전역범위
+-전역 범위를 대표하는 객체 = window
+-모든 전역번수는 window 객체와 연결 
+
+Rule 4. 선언없이 초기화 된 변수는 전역변수
+
+Rule 5. Hoisting
+-변수선언은 범위에 따라 선언과 할당으로 분리되는데
+-JavaScript엔진이 내부적으로 변수선언을 scope상단으로 끌어올리는것을 housting이라고해
+
+——————————
+<Closure>
+================
+*클로저 : 외부 함수의 변수에 접근 할 수 있는 내부 함수, 또는 이러한 작동원리를 일컫는 용어
+
+(예시에서 inner함수가 클로저 함수)
+
+클로저 함수안에서는 지역변수, 외부 함수의 변수, 전역변수의 접근이 전부 가능합니다.
+
+*유용한 클로저 예제
+>커링: 함수 하나가 nㅐ의 인자를 받는 대신, n개의 함수를 만들어 각각 인자를 받게하는 방법
+
+function adder (x) {
+  return function (y) {
+    return x + y;
+  }
+}
+
+adder(2)(3); //5
+
+//x의 값을 고정해 놓고 재 사용할 수 있다.
+let add100 = adder(100);
+add100(2); //102
+add100(10); //110
+
+>외부함수의 변수가 저장되어 마치 템플릿 함수와 같이 사용이 가능
+
+function htmlMaker(tag) {
+  let startTag = '<' + tag + '>';
+  let endTag = '</' + tag + '>'
+  return function(content) {
+    return startTag + content + endTag;
+  }
+}
+
+let divMaker = htmlMaker('div'); 
+divMaker('code') // '<div>code</div>' 
+divMaker('states') // '<div>states</div>'
+
+let h1Maker = htmlMaker('h1');
+h1Maker('Headline') // '<h1>Headline</h1>'
+
+>클로저 모듈패턴: 변수를 스코프 안쪽에 가두어 함수 밖으로 노출 시키지 않는 방법
+
+function makeCounter() {
+  let privateCounter = 0;
+  
+  return {
+    increment: function() {
+      privateCounter++;
+    },
+    decrement: function() {
+      privateCounter--;
+    },
+    getValue: function() {
+      return privateCounter;
+    }
+  }
+}
+
+let counter1 = makeCounter();
+counter1.increment();
+counter1.increment();
+counter1.increment();
+counter1.getValue();
+
+let counter2 = makeCounter();
+
+//두 카운터에 각기 다른 privateCounter를 다루면서, privateCounter를 밖으로 노출시키지 않는다.
+
+다시한번 클로저는
+
+*외부함수의 변수에 접근할 수 있는 내부 함수
+*scope chain으로 표현되기도 한다
+*보통 함수를 return 하여 사용
+*return 하는 내부함수를 closure함수라고 지칭한다
+
+——————————
+<매개변수 parameter>
+==================
+1. arguments : 전달인자와 함께 함수에 전달한다.
+2. parameters : 매개변수를 통해 전달받은 인자를 사용할 수 있다.
+
+>만일, 전달인자(arguments)의 길이가 유동적이라면?
+…nums // ES6) 매개변수자리에 ...nums 로 가지고오지롱
+
+>arguments라는 키워드를 이용할 수도 있다 (ES5)
+
+————————
+<객체지향 JavaScript>
+===============
+ES5) class 는 함수로 정의
+function Car(brand, name, color) {
+  //인스턴스가 만들어질 떄 실행되는 코드
+}
+
+ES6) class 라는 키워드를 이요해서 정의할 수도 있다
+class Car() {
+  constructor(brand, name, color) {
+    //인스턴스가 만들어질 때 실행되는 코드
+  }
+}
+
+>new 키워드를 통해 클래스의 인스턴스를 만든다
+
+let event = new Car(‘hyundai’, ‘avante’, ‘black’);
+let mini = new Car(‘bmw’, ‘mini’, ‘white’);
+
+>클래스의 속성 정의
+ES5) 
+function Car(brand, name, color) {
+  this.brand = brand;
+  this.name = name;
+  this.color = color;
+}
+
+ES6)
+class Car() {
+  construntor(brand, name, color) {
+    this.brand = brand;
+    this.name = name;
+    this.color = color;
+  }
+}
+
+>클래스 : 메소드의 정의
+ES5)
+function Car(brand, name. color) { /* 생략 */ }
+
+Car.prototype.refuel = function() {
+//code
+}
+
+Car.prototype.drive = function() {
+//code
+}
+
+ES6)
+class Car() {
+  construnctor(brand, name, color) { /*생략*/ }
+
+  refuel() {
+  }
+
+  drive() {
+  }
+}
+
+
+
+>prototype : 모델의 청사진을 만들 떄 쓰는 원형 객체(original form)
+>constructor : 인스턴스가 초기화 될 때 실행하는 생성자 함수
+>this : 함수가 실행 될 떄, 해당 scope마다 생성되는 고유한 실행 context(exception context)
+           new 키워드로 인스턴스를 생성했을 떄에는, 해당 인스턴스가 바로 this값이 됨
+
+>실전예제
+
+function Car(brand, name, color) {
+  this.brand = brand;
+  this.name = name;
+  this.color = color;
+}
+
+Car.prototype.refuel = function() {
+console.log('apskdfja')
+}
+
+Car.prototype.drive = function() {
+console.log('운전해')
+}
+let avante = new Car('h', 'avante', 'black');
+avante.color;
+avante.drive();
+
+
+
+
+
+
+
+
+
+
+
+
+
